@@ -2,8 +2,8 @@
 
 ## 0. 目次
 
-1. [開発環境](##1-開発環境)
-2. [環境構築](##2-環境構築)
+1. [開発環境](#1-開発環境)
+2. [環境構築](#2-環境構築)
 
 ---
 
@@ -25,7 +25,7 @@
 2.  リポジトリを XAMPP の`htdocs`配下にクローンする。
 
     ```bash
-        $ git clone https://github.com/chilolin/dortmund.git
+    $ git clone https://github.com/chilolin/dortmund.git
     ```
 
 3.  `.env.example`を参考にして`.env`をルートに作成する。
@@ -38,7 +38,7 @@ $ npm install
 $ php artisan serve
 ```
 
-5. DB を設定する。
+5. XAMPP を起動して DB を設定する。
 
 ```bash
 $ php artisan migrate:fresh
