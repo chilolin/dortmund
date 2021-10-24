@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ChordController;
 use App\Http\Controllers\homeController;
 
 /*
@@ -15,8 +16,12 @@ use App\Http\Controllers\homeController;
 |
 */
 
+
+Route::get('/', [ChordController::class, 'showAll'])->name('chords.showAll');
+Route::get('/merody', [ChordController::class, 'validateSelected'])->name('merody');
+
 Route::resource('justsound', homeController::class);
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
