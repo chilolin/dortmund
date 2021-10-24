@@ -14,8 +14,8 @@ class Chord extends Model
         'created_at'
     ];
 
-    public function getAllChord() {
-        return $this::all();
+    public static function getAllChord() {
+        return self::all();
     }
 
     public function keys()
