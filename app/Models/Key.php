@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Key extends Model
 {
     use HasFactory;
-    public function author()
+
+    protected $guarded = [
+        'id',
+        'created_at'
+    ];
+
+    public function chord()
     {
         return $this->belongsTo(Chord::class);
     }
-    protected $guarded = ['id'];
 }
