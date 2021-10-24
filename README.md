@@ -41,6 +41,7 @@ $ php artisan serve
 5. XAMPP を起動して DB を設定する。
 
 ```bash
+# phpmyadminなどを使って、dortmundデータベースを作る。
 $ php artisan migrate:fresh
 $ php artisan db:seed
 ```
