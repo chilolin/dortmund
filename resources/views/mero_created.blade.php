@@ -8,9 +8,7 @@
         <title>Select Chords</title>
         <script src="{{ asset('/js/function-mero-create.js') }}"></script>
     </head>
-    <body>
-        {{-- @dd($_GET); --}}
-        
+    <body>       
         @dd($mero);
     </body>
 </html>

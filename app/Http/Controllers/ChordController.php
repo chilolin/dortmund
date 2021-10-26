@@ -36,43 +36,39 @@ class ChordController extends Controller
 
         function meroCreate($chords){
             $KeyList =[
-                'C5' => [3,1],
-                'D5' => [3,2],
-                'E5' => [3,3],
-                'F5' => [3,4],
-                'G5' => [3,5],
-                'A5' => [3,6],
-                'B5' => [3,7],
-                'C6' => [3,8],
-                'D6' => [3,9],
-                'E6' => [3,10],
-                'F6' => [3,11],
-                'G6' => [3,12],
-                'A6' => [3,13],
-                'B6' => [3,14]
+                'C4' => [3,1],
+                'D4' => [3,2],
+                'E4' => [3,3],
+                'F4' => [3,4],
+                'G4' => [3,5],
+                'A4' => [3,6],
+                'B4' => [3,7],
+                'C5' => [3,8],
+                'D5' => [3,9],
+                'E5' => [3,10],
+                'F5' => [3,11],
+                'G5' => [3,12],
+                'A5' => [3,13],
+                'B5' => [3,14]
                 ];
                 
-            // $ChordProgre = [
-            //     'FM' => ['A4','C5','F5'],
-            //     'GM' => ['G4','B4','D5'],
-            //     'Em' => ['G4','B4','E5'],
-            //     'Am' => ['A4','C5','E5']
-            //     ];
-            // $ChordProgre = [
-            //     $chords["first_chord"] => 
             $chord1 = Chord::find($chords['first_chord']);
             $chord2 = Chord::find($chords['second_chord']);
             $chord3 = Chord::find($chords['third_chord']);
             $chord4 = Chord::find($chords['forth_chord']);
-
-            $ChordProgre = [];
-            // logger($chord1);
-
-            ///////////////////////ここから
-            // $addChord = [$chord1[name] => [$chord1->keys]];
-
             
             
+         
+
+            $ChordProgre = [
+                [$chord1->name,$chord1->keys[0]->name, $chord1->keys[1]->name,$chord1->keys[2]->name],
+                [$chord2->name,$chord2->keys[0]->name, $chord2->keys[1]->name,$chord2->keys[2]->name],
+                [$chord3->name, $chord3->keys[0]->name, $chord3->keys[1]->name,$chord3->keys[2]->name],
+                [$chord4->name, $chord4->keys[0]->name, $chord4->keys[1]->name,$chord4->keys[2]->name],
+            ];
+
+            
+
             
             function totalWeight($list){
                 return array_sum((array_column($list, 0)));
@@ -97,9 +93,10 @@ class ChordController extends Controller
             
             
             $KeyListRenew = array();
-            foreach($ChordProgre as $key =>$val){
+            
+            foreach($ChordProgre as $val){
                 $chordKeys = array();
-                array_push($chordKeys,mb_ereg_replace('[^a-zA-Z]', '', $val[0]),mb_ereg_replace('[^a-zA-Z]', '', $val[1]),mb_ereg_replace('[^a-zA-Z]', '', $val[2]));
+                array_push($chordKeys,mb_ereg_replace('[^a-zA-Z]', '', $val[1]),mb_ereg_replace('[^a-zA-Z]', '', $val[2]));
                 $i = 0;
                 
                 while ($i < 8) {
@@ -119,8 +116,8 @@ class ChordController extends Controller
                 
             }
             
-            dd($chord2->getSecondKey());
-            // return $chord1;
+            array_shift($merokeys);
+            return $merokeys;
             
         }
 
@@ -133,10 +130,9 @@ class ChordController extends Controller
         ]);
         
         $mero = meroCreate($_GET);
-        // return view('mero_created',compact('mero'));
-        
-        // return view('mero_created');
-        // return view('mero_created',compact('keys'));
+
+        return view('mero_created',compact('mero'));
+  
     }
 
     
