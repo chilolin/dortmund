@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KeysTableSeeder::class,
             ChordsTableSeeder::class,
+            Chord_KeyTableSeeder::class
           ]);
     }
 }
