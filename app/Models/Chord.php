@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Chord extends Model
 {
@@ -20,7 +21,8 @@ class Chord extends Model
 
     public function keys()
     {
-        return $this->hasMany(Key::class);
+        return $this->belongsToMany(Key::class);
     }
+     
 
 }

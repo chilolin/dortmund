@@ -12,7 +12,7 @@
             <select name="first_chord" id="first-chord">
                 <option value="">--Please choose an option--</option>
                 @foreach($chords as $chord)
-                        <option value="{{ $chord->name }}" @if (old('first_chord') == $chord->name) selected @endif>{{ $chord->name }}</option>
+                        <option value="{{ $chord->id }}" @if (old('first_chord') == $chord->id) selected @endif>{{ $chord->name }}</option>
                 @endforeach
             </select>
             @error('first_chord')
@@ -23,7 +23,7 @@
             <select name="second_chord" id="second-chord">
                 <option value="">--Please choose an option--</option>
                 @foreach($chords as $chord)
-                    <option value="{{ $chord->name }}" @if (old('second_chord') == $chord->name) selected @endif>{{ $chord->name }}</option>
+                    <option value="{{ $chord->id }}" @if (old('second_chord') == $chord->id) selected @endif>{{ $chord->name }}</option>
                 @endforeach
             </select>
             @error('second_chord')
@@ -34,7 +34,7 @@
             <select name="third_chord" id="third-chord">
                 <option value="">--Please choose an option--</option>
                 @foreach($chords as $chord)
-                    <option value="{{ $chord->name }}" @if (old('third_chord') == $chord->name) selected @endif>{{ $chord->name }}</option>
+                    <option value="{{ $chord->id}}" @if (old('third_chord') == $chord->id) selected @endif>{{ $chord->name }}</option>
                 @endforeach
             </select>
             @error('third_chord')
@@ -45,7 +45,7 @@
             <select name="forth_chord" id="forth-chord">
                 <option value="">--Please choose an option--</option>
                 @foreach($chords as $chord)
-                    <option value="{{ $chord->name }}" @if (old('forth_chord') == $chord->name) selected @endif>{{ $chord->name }}</option>
+                    <option value="{{ $chord->id }}" @if (old('forth_chord') == $chord->id) selected @endif>{{ $chord->name }}</option>
                 @endforeach
             </select>
             @error('forth_chord')

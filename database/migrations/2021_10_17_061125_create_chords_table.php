@@ -14,19 +14,19 @@ class CreateChordsTable extends Migration
     public function up()
     {
         Schema::create('chords', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name');
 
-            $table->unsignedBigInteger('first_key_id');
-            $table->foreign('first_key_id')->references('id')->on('keys')->onDelete('cascade');
-            $table->unsignedBigInteger('second_key_id');
-            $table->foreign('second_key_id')->references('id')->on('keys')->onDelete('cascade');
-            $table->unsignedBigInteger('third_key_id');
-            $table->foreign('third_key_id')->references('id')->on('keys')->onDelete('cascade');
-            $table->unsignedBigInteger('forth_key_id')->nullable();
-            $table->foreign('forth_key_id')->references('id')->on('keys')->onDelete('cascade');
-            $table->unsignedBigInteger('fifth_key_id')->nullable();
-            $table->foreign('fifth_key_id')->references('id')->on('keys')->onDelete('cascade');
+            // $table->unsignedBigInteger('first_key_id');
+            // $table->foreign('first_key_id')->references('id')->on('keys')->onDelete('cascade');
+            // $table->unsignedBigInteger('second_key_id');
+            // $table->foreign('second_key_id')->references('id')->on('keys')->onDelete('cascade');
+            // $table->unsignedBigInteger('third_key_id');
+            // $table->foreign('third_key_id')->references('id')->on('keys')->onDelete('cascade');
+            // $table->unsignedBigInteger('forth_key_id')->nullable();
+            // $table->foreign('forth_key_id')->references('id')->on('keys')->onDelete('cascade');
+            // $table->unsignedBigInteger('fifth_key_id')->nullable();
+            // $table->foreign('fifth_key_id')->references('id')->on('keys')->onDelete('cascade');
 
             $table->timestamps();
              
