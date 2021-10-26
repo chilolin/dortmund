@@ -117,7 +117,14 @@ class ChordController extends Controller
             }
             
             array_shift($merokeys);
-            return $merokeys;
+            $merofreqs = [];
+
+            foreach($merokeys as $val){
+                $freq = Key::where('name',$val)->value('freq');
+                array_push($merofreqs,$freq);
+            }
+            
+            return [$merokeys,$merofreqs];
             
         }
 
@@ -130,8 +137,10 @@ class ChordController extends Controller
         ]);
         
         $mero = meroCreate($_GET);
+        $merokeys = $mero[0];
+        $merofreqs = $mero[1];
 
-        return view('mero_created',compact('mero'));
+        return view('mero_created',compact('merokeys','merofreqs'));
   
     }
 
