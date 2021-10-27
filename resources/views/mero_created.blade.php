@@ -56,7 +56,6 @@
                       else{
                         echo '<td class="table-dark"></td>';
                       }
-                      // $w++;
                     }
 
                   }
