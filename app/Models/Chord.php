@@ -29,6 +29,16 @@ class Chord extends Model
         ];
     }
 
+    public static function getChordWithKeysFreq(string $id) {
+        $chord = self::find($id);
+        return [
+            'chordName' => $chord->name,
+            'key1' => $chord->keys[0]->freq,
+            'key2' => $chord->keys[1]->freq,
+            'key3' => $chord->keys[2]->freq,
+        ];
+    }
+
     public function keys()
     {
         return $this->belongsToMany(Key::class);

@@ -14,6 +14,7 @@
     <body>
         {{-- @dd($_GET) --}}
         {{-- @dd($merofreqs); --}}
+        {{-- @dd($chordProgressFreqs); --}}
         <div class="container">
         <h3>Melody</h3>
         <table class="table-sm table-bordered">

@@ -45,6 +45,7 @@ class Merody {
                     }
                     $addList = [$key => [$newWeight,$val[1]]];
                     $renewKeyList = array_merge($renewKeyList, $addList);
+                    
                 }
 
                 array_push(

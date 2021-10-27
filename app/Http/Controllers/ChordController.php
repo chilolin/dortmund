@@ -43,6 +43,14 @@ class ChordController extends Controller
             $selectedChords
         );
 
+        $chordProgressFreqs = array_map(
+            function(string $chordId) {
+                return Chord::getChordWithKeysFreq($chordId);
+            },
+            $selectedChords
+        );
+        
+
         // メロディを生成。
         $merody = Merody::create($chordProgress);
         $scores = $merody['scores'];
@@ -50,6 +58,6 @@ class ChordController extends Controller
         $chordProgKeys = $merody['chordProgKeys'];
      
 
-        return view('mero_created', compact('scores', 'merofreqs','chordProgKeys'));
+        return view('mero_created', compact('scores', 'merofreqs','chordProgKeys','chordProgressFreqs'));
     }
 }
