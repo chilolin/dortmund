@@ -14,29 +14,61 @@
     <body>
         {{-- @dd($_GET) --}}
         {{-- @dd($merofreqs); --}}
-        <? php $keys = [C4,D4,E4,F4,G4,A4,B4,C5] ?>
-        <h1>Tutorial made by Positronx.io</h1>
-        <table class="table table-bordered">
+        <div class="container">
+        <h3>Melody</h3>
+        <table class="table-sm table-bordered">
             <thead >
               <tr >
-                <th scope="col">Key</th>
-                <th scope="col" colspan="8">FM</th>
-                <th scope="col" colspan="8">GM</th>
-                <th scope="col" colspan="8">Em</th>
-                <th scope="col" colspan="8">Am</th>
+                <th scope="col"></th>
+                <th scope="col" colspan="8"><?php echo $chordProgKeys[0][0];?></th>
+                <th scope="col" colspan="8"><?php echo $chordProgKeys[1][0];?></th>
+                <th scope="col" colspan="8"><?php echo $chordProgKeys[2][0];?></th>
+                <th scope="col" colspan="8"><?php echo $chordProgKeys[3][0];?></th>
               </tr>
             </thead>
             <tbody>
-                
-                <th scope="row">C4</th>
                 <?php
-                    for ($i = 0; $i < 32; $i++) {
-                    echo '<td></td>';
+                  foreach ($scores as $key => $val) {
+                    $w=0;
+                    while($w <=3){
+                      $start = 8*$w;
+                      $end = 8*($w+1)-1;
+                      if (in_array(mb_ereg_replace('[^a-zA-Z]', '', $key),$chordProgKeys[$w])){
+                        
+                        $t = $start;
+                        while ($t<=$end){
+                          $val[$t] +=4;
+                          $t++;
+                        }
+                      }
+                      $w ++;
                     }
+                   
+                    echo('<tr><th scope="row">'.$key.'</th>');
+
+
+                    foreach($val as $timing){
+                      if($timing == 0){
+                        echo '<td></td>';
+                      }elseif($timing == 4){
+                        echo '<td class="table-secondary"></td>';
+                      }
+                      else{
+                        echo '<td class="table-dark"></td>';
+                      }
+                      // $w++;
+                    }
+
+                  }
+                  
+                  echo('</tr>')
+                    
                 ?>
               </tr>
               
             </tbody>
           </table>
+        </div>
+        
     </body>
 </html>

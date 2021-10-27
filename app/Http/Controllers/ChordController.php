@@ -45,9 +45,11 @@ class ChordController extends Controller
 
         // メロディを生成。
         $merody = Merody::create($chordProgress);
-        $merokeys = $merody['merokeys'];
+        $scores = $merody['scores'];
         $merofreqs = $merody['merofreqs'];
+        $chordProgKeys = $merody['chordProgKeys'];
+     
 
-        return view('mero_created', compact('merokeys', 'merofreqs'));
+        return view('mero_created', compact('scores', 'merofreqs','chordProgKeys'));
     }
 }
