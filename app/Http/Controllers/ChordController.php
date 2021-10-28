@@ -32,12 +32,15 @@ class ChordController extends Controller
             'second_chord' => 'required',
             'third_chord' => 'required',
             'forth_chord' => 'required',
+            'keys' => 'required'
         ]);
 
-        dd($_GET);
 
         // key付きのコード情報を取得
         $selectedChords = $request->query->all();
+        $keys = $selectedChords['keys'];
+        unset($selectedChords['keys']);
+
         $chordProgress = array_map(
             function(string $chordId) {
                 return Chord::getChordWithKeys($chordId);
@@ -54,7 +57,7 @@ class ChordController extends Controller
         
 
         // メロディを生成。
-        $merody = Merody::create($chordProgress);
+        $merody = Merody::create($chordProgress,$keys);
         $scores = $merody['scores'];
         $merofreqs = $merody['merofreqs'];
         $chordProgKeys = $merody['chordProgKeys'];

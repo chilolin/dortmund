@@ -3,28 +3,31 @@ namespace App\Library;
 
 use App\Models\Key;
 
-class Merody {
-    protected static $KEY_LIST = [
-        'C4' => [3,1],
-        'D4' => [3,2],
-        'E4' => [3,3],
-        'F4' => [3,4],
-        'G4' => [3,5],
-        'A4' => [3,6],
-        'B4' => [3,7],
-        'C5' => [3,8],
-        'D5' => [3,9],
-        'E5' => [3,10],
-        'F5' => [3,11],
-        'G5' => [3,12],
-        'A5' => [3,13],
-        'B5' => [3,14]
-    ];
+class Merody {  
 
-    public static function create($chordProgress) {
+    static $KEY_LIST = [];
+
+    public static function create($chordProgress,$keys) {
+
+        
+        $z=0;
+        foreach($keys as $val) {
+            $key=Key::find($val);
+            $addArray =  [$key->name =>[3,$z]];
+
+            self::$KEY_LIST += $addArray;
+            $z++;
+
+        }
+
+
         $merokeys = [self::selectKey(self::$KEY_LIST)];
         $renewKeyList = [];
         $chordProgKeys =[];
+        
+        
+
+        
         
         foreach ($chordProgress as $chord) {
             $w=0;
@@ -47,6 +50,7 @@ class Merody {
                     $renewKeyList = array_merge($renewKeyList, $addList);
                     
                 }
+                
 
                 array_push(
                     $merokeys,
@@ -96,30 +100,34 @@ class Merody {
     }
     private static function changeToScore($merokeys){
         $score = [];
-        foreach(self::$KEY_LIST as $key=>$val){
-            $score = $score + array($key=>array_fill(0,32,0));       
+        $lowestkeyId = Key::where('name',array_key_first(self::$KEY_LIST))->first()->id;
+        $highestkeyId = Key::where('name',array_key_last(self::$KEY_LIST))->first()->id;
+
+        for ($i = $lowestkeyId; $i <= $highestkeyId; $i++) {
+            $score = $score + array(Key::find($i)->name =>array_fill(0,32,0)); 
         }
+        
         foreach($merokeys as $key=>$val){
             $score[$val][$key] = 1;
         }
-        
-        uksort($score, function($key1,$key2){
-            $pattern = '/[0-9]/';
-            if(strpos($key1, 'A') !== false or strpos($key1, 'B') !== false){
-                $key1 = preg_replace_callback($pattern, function ($m) {
+        $score = array_reverse($score);
+
+        //ここからのuksort関数のコメントアウトは現状要らないが一応残している
+        // uksort($score, function($key1,$key2){
+        //     $pattern = '/[0-9]/';
+        //     if(strpos($key1, 'A') !== false or strpos($key1, 'B') !== false){
+        //         $key1 = preg_replace_callback($pattern, function ($m) {
                     
-                    return ($m[0] + 1);
-                }, $key1);
-              }
-            if(strpos($key2, 'A') !== false or strpos($key2, 'B') !== false){
-                $key2 = preg_replace_callback($pattern, function ($m) {
-                    return ($m[0] + 1);
-                }, $key2);
-            }
-
-
-            return strrev($key1) <strrev($key2);
-        } );
+        //             return ($m[0] + 1);
+        //         }, $key1);
+        //       }
+        //     if(strpos($key2, 'A') !== false or strpos($key2, 'B') !== false){
+        //         $key2 = preg_replace_callback($pattern, function ($m) {
+        //             return ($m[0] + 1);
+        //         }, $key2);
+        //     }
+        //     return strrev($key1) <strrev($key2);
+        // } );
         
         return $score;
     } 

@@ -57,11 +57,13 @@
                     <p>必ず指定してください。</p>
                 @enderror
 
-                <?php $keys = DB::table('keys')->get(); ?>
-                {{-- @dd($keys); --}}
+                <h6>キー選択</h6>
+                <?php $keys = DB::table('keys')->whereBetween('id', [52, 64])->get(); ?>
                 <?php foreach($keys as $val){ ?>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="keys" id="keys1" value="{{ $val->id }}"checked>
+                    <input class="form-check-input" type="checkbox" name="keys[]" id="keys1" value="{{ $val->id }}" 
+                    <?php if (strpos($val->name,'#') === false) echo("checked"); ?> 
+                    > 
                     <label class="form-check-label" for="keys1">
                       <?php echo($val->name)?>
                     </label>
