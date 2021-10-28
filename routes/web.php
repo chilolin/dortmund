@@ -18,10 +18,14 @@ use App\Http\Controllers\homeController;
 
 
 Route::get('/', [ChordController::class, 'showAll'])->name('chords.showAll');
-Route::get('/merody', [ChordController::class, 'validateSelected'])->name('merody');
+Route::get('/merody', [ChordController::class, 'createMerodyBySelected'])->name('merody');
 
 Route::resource('justsound', homeController::class);
 
 // Route::get('/', function () {
 //     return view('home');
 // });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
