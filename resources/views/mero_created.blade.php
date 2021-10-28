@@ -50,7 +50,7 @@
                     while($w <=3){
                       $start = 8*$w;
                       $end = 8*($w+1)-1;
-                      if (in_array(mb_ereg_replace('[^a-zA-Z]', '', $key),$chordProgKeys[$w])){
+                      if (in_array(mb_ereg_replace('[0-9]', '', $key),$chordProgKeys[$w])){
                         
                         $t = $start;
                         while ($t<=$end){
