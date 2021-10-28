@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
          <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('/js/function-play-sound.js') }}"></script>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -15,6 +16,21 @@
         {{-- @dd($_GET) --}}
         {{-- @dd($merofreqs); --}}
         {{-- @dd($chordProgressFreqs); --}}
+        <?php
+        $mero_array = json_encode($merofreqs);
+        $chord_array = json_encode($chordProgressFreqs);
+        // var_dump($mero_array);
+        // var_dump($chord_array);
+        // exit();
+
+        ?>
+
+        <script>
+            let mero_array = <?php echo $mero_array; ?>;
+            console.log(mero_array); 
+            PlayChord(mero_array,0.1);
+        </script>
+
         <div class="container">
         <h3>Melody</h3>
         <table class="table-sm table-bordered">
@@ -69,6 +85,6 @@
             </tbody>
           </table>
         </div>
-        
+        <button onclick="PlayChord(mero_array,0.1);">Replay</button>
     </body>
 </html>
