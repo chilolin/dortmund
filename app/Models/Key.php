@@ -14,8 +14,12 @@ class Key extends Model
         'created_at'
     ];
 
+
+
     public function chords()
     {
         return $this->belongsToMany(Chord::class);
     }
+
+    
 }

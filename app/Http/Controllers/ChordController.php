@@ -34,6 +34,8 @@ class ChordController extends Controller
             'forth_chord' => 'required',
         ]);
 
+        dd($_GET);
+
         // key付きのコード情報を取得
         $selectedChords = $request->query->all();
         $chordProgress = array_map(
