@@ -27,8 +27,10 @@
 
         <script>
             let mero_array = <?php echo $mero_array; ?>;
+            let chord_array = <?php echo $chord_array; ?>;
             console.log(mero_array); 
-            // PlayChord(mero_array,0.1);
+            console.log(chord_array);
+            // playAccompany(mero_array,chord_array,0.25);
         </script>
 
         <div class="container">
@@ -84,7 +86,7 @@
               
             </tbody>
           </table>
-          <button onclick="PlayChord(mero_array,0.25);">Replay</button>
+          <button onclick="playAccompany(mero_array,chord_array,0.25);">Replay</button>
         </div>
         
     </body>
