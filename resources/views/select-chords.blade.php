@@ -30,10 +30,10 @@
 
                 <div class="row p-3">
 
-                        <x-chord-selector id="first-chord" name="firstChord" chords="{{ $chords }}" />
-                        <x-chord-selector id="second-chord" name="secondChord" chords="{{ $chords }}" />
-                        <x-chord-selector id="third-chord" name="thirdChord" chords="{{ $chords }}" />
-                        <x-chord-selector id="forth-chord" name="forthChord" chords="{{ $chords }}" />
+                        <x-chord-selector id="first-chord" name="firstChord" />
+                        <x-chord-selector id="second-chord" name="secondChord" />
+                        <x-chord-selector id="third-chord" name="thirdChord" />
+                        <x-chord-selector id="forth-chord" name="forthChord" />
 
                 </div>
 
