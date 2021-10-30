@@ -1,24 +1,13 @@
 console.log("check-js");
-function PlayChord(chord_array,unit_time){
-    for (t=0; t<32; t++){
-      audioctx = new AudioContext();
-      var T = String(t);
-      osc_T = new OscillatorNode(audioctx);
-      osc_T.frequency.value = chord_array[t];
-      osc_T.type = "square";
-      osc_T.connect(audioctx.destination);
-      osc_T.start(t*unit_time);
-      osc_T.stop((t+1)*unit_time);
-    }
-  }
-
-
 
 
 function playAccompany(mero_array,chord_array,unit_time){
 
-  // const startTime = Date.now();
-  // console.log("START",startTime);
+  console.log(mero_array);
+  console.log(chord_array);
+
+  const startTime = Date.now();
+  console.log("START",startTime);
 
   
   key_array = ["key1","key2","key3"];
@@ -27,13 +16,6 @@ function playAccompany(mero_array,chord_array,unit_time){
 
   for (t=0; t<32; t++){
     audioctx = new AudioContext();
-    osc_mero = new OscillatorNode(audioctx);
-    osc_mero.frequency.value = mero_array[t];
-    osc_mero.type = "square";
-    osc_mero.connect(audioctx.destination);
-    osc_mero.start(t*unit_time);
-    osc_mero.stop((t+1)*unit_time);
-    // console.log("meroStart",t*unit_time);
 
 
     s = t % 8;
@@ -73,17 +55,22 @@ function playAccompany(mero_array,chord_array,unit_time){
     }
 
 
+    osc_mero = new OscillatorNode(audioctx);
+    osc_mero.frequency.value = mero_array[t];
+    osc_mero.type = "square";
+    osc_mero.connect(audioctx.destination);
+    osc_mero.start(t*unit_time);
+    osc_mero.stop((t+1)*unit_time);
 
+    // console.log("meroStart",t*unit_time);
 
-
-
-
+    // console.log(t);
   }
 
 
-
-  // const endTime = Date.now();
-  // console.log("END-START",endTime - startTime);
+  const endTime = Date.now();
+  console.log("ENDTIME",endTime);
+  console.log("END-START",endTime - startTime);
 
 };
 
