@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/function-play-sound.js') }}" defer></script>
+        <script src="{{ asset('js/function-play-sound.js') }}?v=(new Date()).getTime()" defer></script>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -29,7 +29,6 @@
             let chord_array = <?php echo $chord_array; ?>;
             console.log(mero_array);
             console.log(chord_array);
-            // playAccompany(mero_array,chord_array,0.25);
         </script>
 
         <div class="container">
@@ -82,7 +81,7 @@
                 </tbody>
             </table>
 
-            <button onclick="playAccompany(mero_array,chord_array,0.25);">Replay</button>
+            <button onclick="playAccompany(mero_array,chord_array,0.25);">Play</button>
         </div>
     </body>
 </html>

@@ -1,51 +1,76 @@
 console.log("check-js");
-function PlayChord(chord_array,unit_time){
-    for (t=0; t<32; t++){
-      audioctx = new AudioContext();
-      var T = String(t);
-      osc_T = new OscillatorNode(audioctx);
-      osc_T.frequency.value = chord_array[t];
-      osc_T.type = "square";
-      osc_T.connect(audioctx.destination);
-      osc_T.start(t*unit_time);
-      osc_T.stop((t+1)*unit_time);
-    }
-  }
-  
+
+
 function playAccompany(mero_array,chord_array,unit_time){
 
+  console.log(mero_array);
+  console.log(chord_array);
+
+  const startTime = Date.now();
+  console.log("START",startTime);
+
   
+  key_array = ["key1","key2","key3"];
+  // console.log(Object.entries(chord_array));
+
+
   for (t=0; t<32; t++){
     audioctx = new AudioContext();
-    osc_T = new OscillatorNode(audioctx);
-    osc_T.frequency.value = mero_array[t];
-    osc_T.type = "square";
-    osc_T.connect(audioctx.destination);
-    osc_T.start(t*unit_time);
-    osc_T.stop((t+1)*unit_time);
-  }
-  console.log(t);
 
-  key_array = ["key1","key2","key3"];
-  console.log(Object.entries(chord_array));
 
-  for (s=0; s<4; s++){
-    var S = String(s);
-    for (u=0; u<3; u++){
-      var U = String(u);
-      audioctx = new AudioContext();
-      osc_S_U = new OscillatorNode(audioctx);
-      osc_S_U.frequency.value = Object.entries(chord_array)[s][1][key_array[u]];
-      console.log(Object.entries(chord_array)[s][1][key_array[u]]);
-      osc_S_U.type = "sine";
-      osc_S_U.connect(audioctx.destination);
-      osc_S_U.start(s*unit_time*8);
-      osc_S_U.stop((s+1)*unit_time*8);
+    s = t % 8;
+
+
+    if (s == 0){
+        osc_chord0 = new OscillatorNode(audioctx);
+        osc_chord0.frequency.value = Object.entries(chord_array)[Math.floor(t/8)][1][key_array[0]];
+        osc_chord0.type = "sine";
+        osc_chord0.connect(audioctx.destination);
+        osc_chord0.start(t*unit_time);
+
+        osc_chord1 = new OscillatorNode(audioctx);
+        osc_chord1.frequency.value = Object.entries(chord_array)[Math.floor(t/8)][1][key_array[1]];
+        osc_chord1.type = "sine";
+        osc_chord1.connect(audioctx.destination);
+        osc_chord1.start(t*unit_time);
+
+        osc_chord2 = new OscillatorNode(audioctx);
+        osc_chord2.frequency.value = Object.entries(chord_array)[Math.floor(t/8)][1][key_array[2]];
+        osc_chord2.type = "sine";
+        osc_chord2.connect(audioctx.destination);
+        osc_chord2.start(t*unit_time);
+
+        // console.log("chordStart",t*unit_time);
+
 
 
     }
 
-  }
-  console.log(s);
+    if (s == 7){
+      osc_chord0.stop((t+1)*unit_time);
+      osc_chord1.stop((t+1)*unit_time);
+      osc_chord2.stop((t+1)*unit_time);
 
-}
+      // console.log("chordStop",(t+1)*unit_time);
+    }
+
+
+    osc_mero = new OscillatorNode(audioctx);
+    osc_mero.frequency.value = mero_array[t];
+    osc_mero.type = "square";
+    osc_mero.connect(audioctx.destination);
+    osc_mero.start(t*unit_time);
+    osc_mero.stop((t+1)*unit_time);
+
+    // console.log("meroStart",t*unit_time);
+
+    // console.log(t);
+  }
+
+
+  const endTime = Date.now();
+  console.log("ENDTIME",endTime);
+  console.log("END-START",endTime - startTime);
+
+};
+
