@@ -4,22 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chord;
+use App\Models\Key;
 use App\Library\Merody;
 
 class ChordController extends Controller
 {
-    /**
-     *　　コードを選択する画面に遷移する。
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function showAll() {
-        $chords = Chord::all();
-        return view('select-chords', [
-            'chords' => $chords
-        ]);
-    }
-
     /**
      * 選択したコードからメロディを作成して、
      * メロディを流す画面に遷移する。

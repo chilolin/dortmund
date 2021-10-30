@@ -17,7 +17,9 @@ use App\Http\Controllers\homeController;
 */
 
 
-Route::get('/', [ChordController::class, 'showAll'])->name('chords.showAll');
+Route::get('/', function () {
+    return view('select-chords');
+})->name('select-chords');
 Route::get('/merody', [ChordController::class, 'createMerodyBySelected'])->name('merody');
 
 Route::resource('justsound', homeController::class);

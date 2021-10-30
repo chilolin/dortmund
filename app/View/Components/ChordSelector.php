@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Models\Chord;
 
 class ChordSelector extends Component
 {
@@ -32,14 +33,13 @@ class ChordSelector extends Component
      *
      * @param  string  $id
      * @param  string  $name
-     * @param  string  $chords
      * @return void
      */
-    public function __construct($id, $name, $chords)
+    public function __construct($id, $name)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->chords = json_decode(htmlspecialchars_decode($chords));
+        $this->chords = Chord::all();
     }
 
     /**

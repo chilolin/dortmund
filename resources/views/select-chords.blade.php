@@ -14,37 +14,24 @@
         <div class="container">
             <nav class="navbar navbar-light bg-light">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="/">Dortmund</a>
+                    <a class="navbar-brand" href="/">Dortmund</a>
                 </div>
             </nav>
-              
-             
+
+
             <form action="{{ route('merody') }}" method="GET" class="needs-validation" novalidate>
                 <div class="row">
-                    <x-chord-selector id="first-chord" name="firstChord" chords="{{ $chords }}" />
-                    <x-chord-selector id="second-chord" name="secondChord" chords="{{ $chords }}" />
-                    <x-chord-selector id="third-chord" name="thirdChord" chords="{{ $chords }}" />
-                    <x-chord-selector id="forth-chord" name="forthChord" chords="{{ $chords }}" />
+                    <x-chord-selector id="first-chord" name="firstChord" />
+                    <x-chord-selector id="second-chord" name="secondChord" />
+                    <x-chord-selector id="third-chord" name="thirdChord" />
+                    <x-chord-selector id="forth-chord" name="forthChord" />
                 </div>
 
                 <x-range-slider min="1" max="100" name="smoothness" />
                 <x-range-slider min="1" max="20" step="0.1" name="harmonious" />
 
                 <h6>キー選択</h6>
-                <?php
-                use Illuminate\Support\Facades\DB;
-
-                $keys = DB::table('keys')->whereBetween('id', [52, 64])->get(); ?>
-                <?php foreach($keys as $val){ ?>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="keys[]" id="keys1" value="{{ $val->id }}"
-                    <?php if (strpos($val->name,'#') === false) echo("checked"); ?>
-                    >
-                    <label class="form-check-label" for="keys1">
-                        <?php echo($val->name)?>
-                    </label>
-                </div>
-                <?php  } ?>
+                <x-scale-selector />
 
                 <div>
                     <button type="submit">メロディ生成</button>
