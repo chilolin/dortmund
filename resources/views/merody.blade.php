@@ -1,34 +1,24 @@
+<?php
+    $mero_array = json_encode($merofreqs);
+    $chord_array = json_encode($chordProgressFreqs);
+    // var_dump($mero_array);
+    // var_dump($chord_array);
+    // exit();
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/function-play-sound.js') }}?v=(new Date()).getTime()" defer></script>
+        <script src="{{ asset('js/playSound.js') }}?v=(new Date()).getTime()" defer></script>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <title>Select Chords</title>
+        <title>メロディ</title>
     </head>
     <body>
-        {{-- @dd($_GET) --}}
-        {{-- @dd($merofreqs); --}}
-        <?php
-        $mero_array = json_encode($merofreqs);
-        $chord_array = json_encode($chordProgressFreqs);
-        // var_dump($mero_array);
-        // var_dump($chord_array);
-        // exit();
-
-        ?>
-
-        <script>
-            let mero_array = <?php echo $mero_array; ?>;
-            let chord_array = <?php echo $chord_array; ?>;
-            console.log(mero_array);
-            console.log(chord_array);
-        </script>
         <nav class="navbar navbar-light bg-dark">
             <div class="container">
                 <div class="col">
@@ -40,7 +30,6 @@
         </nav>
 
         <div class="container p-3">
-
             <h3>Melody</h3>
             <table class="table table-bordered">
                 <thead >
@@ -53,14 +42,14 @@
                 </thead>
                 <tbody>
                     <?php
-                        foreach ($scores as $key => $val) {
-                            for ($i = 0; $i < 4; $i++) {
+                        foreach($scores as $key => $val) {
+                            for($i = 0; $i < 4; $i++) {
                                 $start = 8 * $i;
                                 $end = 8 * ($i + 1) - 1;
-                                if (in_array(mb_ereg_replace('[0-9]', '', $key), $chordProgKeys[$i])){
+                                if (in_array(mb_ereg_replace('[0-9]', '', $key), $chordProgKeys[$i])) {
                                     $t = $start;
-                                    while ($t<=$end){
-                                        $val[$t] +=4;
+                                    while($t <= $end) {
+                                        $val[$t] += 4;
                                         $t++;
                                     }
                                 }
@@ -68,13 +57,12 @@
 
                             echo('<tr><th scope="row">'.$key.'</th>');
 
-                            foreach($val as $timing){
-                                if($timing == 0){
+                            foreach($val as $timing) {
+                                if ($timing == 0) {
                                     echo '<td></td>';
-                                }elseif($timing == 4){
+                                } elseif ($timing == 4) {
                                     echo '<td class="table-secondary"></td>';
-                                }
-                                else{
+                                } else {
                                     echo '<td class="table-dark"></td>';
                                 }
                             }
@@ -85,15 +73,17 @@
                 </tbody>
             </table>
 
-                <button class="btn btn-dark"yb onclick="playAccompany(mero_array,chord_array,0.25);">Play</button>
-                <button class="btn btn-dark" onclick="window.location.reload(true);">
-                    <i class="fa fa-refresh" aria-hidden="true"></i><span>Recreate</span>
-                </button>
-                <div class="text-right">
+            <script>
+                const mero_array = <?php echo $mero_array; ?>;
+                const chord_array = <?php echo $chord_array; ?>;
+            </script>
+            <button class="btn btn-dark" onclick="playAccompany(mero_array, chord_array, 0.25);">Play</button>
+            <button class="btn btn-dark" onclick="window.location.reload(true);">
+                <i class="fa fa-refresh" aria-hidden="true"></i><span>Recreate</span>
+            </button>
+            <div class="text-right">
                 <button class="btn btn-dark ml-auto" onclick="location.href='/'" >Return Chords Select</button>
-                </div>
-            
-            
+            </div>
         </div>
     </body>
 </html>
