@@ -26,6 +26,5 @@ Route::resource('justsound', homeController::class);
 //     return view('home');
 // });
 
-Auth::routes();
-
+// Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

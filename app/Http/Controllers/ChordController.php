@@ -11,31 +11,45 @@ class ChordController extends Controller
     /**
      * コードを全て渡す
      *
-     * @return \Illuminate\Database\Eloquent\Collection<mixed, \App\Models\Chord>
+     * @return array
      */
     public function getAll() {
         $chords = Chord::all();
         return $chords;
     }
 
+    /**
+     *　　コードを選択する画面に遷移する。
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function showAll() {
         $chords = Chord::all();
-        return view('select_chords', [
+        return view('select-chords', [
             'chords' => $chords
         ]);
     }
 
+    /**
+     * 選択したコードからメロディを作成して、
+     * メロディを流す画面に遷移する。
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function createMerodyBySelected(Request $request) {
         // バリデーション
         $request->validate([
-            'first_chord' => 'required',
-            'second_chord' => 'required',
-            'third_chord' => 'required',
-            'forth_chord' => 'required',
+            'firstChord' => 'required',
+            'secondChord' => 'required',
+            'thirdChord' => 'required',
+            'forthChord' => 'required',
+            'smoothness' => 'required',
+            'harmonious' => 'required',
         ]);
 
-        // key付きのコード情報を取得
-        $selectedChords = $request->query->all();
+        // キー付きのコード情報を取得
+        $selectedChords = $request->except('smoothness', 'harmonious');
         $chordProgress = array_map(
             function(string $chordId) {
                 return Chord::getChordWithKeys($chordId);
@@ -44,12 +58,13 @@ class ChordController extends Controller
         );
 
         // メロディを生成。
-        $merody = Merody::create($chordProgress);
+        $smoothness = $request->input('smoothness');
+        $harmonious = $request->input('harmonious');
+        $merody = Merody::create($chordProgress, $smoothness, $harmonious);
         $scores = $merody['scores'];
         $merofreqs = $merody['merofreqs'];
         $chordProgKeys = $merody['chordProgKeys'];
-     
 
-        return view('mero_created', compact('scores', 'merofreqs','chordProgKeys'));
+        return view('merody', compact('scores', 'merofreqs','chordProgKeys'));
     }
 }
