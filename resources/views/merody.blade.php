@@ -31,13 +31,18 @@
             console.log(chord_array);
             // playAccompany(mero_array,chord_array,0.25);
         </script>
-
-        <div class="container">
-            <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="/">Dortmund</a>
+        <nav class="navbar navbar-light bg-dark">
+            <div class="container">
+                <div class="col">
+                    <div class="text-center">
+                        <a class="navbar-brand text-warning" href="/">Dortmund</a>
+                    </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
+
+        <div class="container p-3">
+            
             <h3>Melody</h3>
             <table class="table table-bordered">
                 <thead >
@@ -82,7 +87,7 @@
                 </tbody>
             </table>
 
-            <button onclick="playAccompany(mero_array,chord_array,0.25);">Replay</button>
+            <button class="btn btn-dark" onclick="playAccompany(mero_array,chord_array,0.25);">Replay</button>
         </div>
     </body>
 </html>

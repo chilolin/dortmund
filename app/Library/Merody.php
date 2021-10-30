@@ -32,7 +32,7 @@ class Merody {
      * @param float $harmonious
      * @return array
      */
-    public function create(array $chordProgress, int $smoothness=30, float $harmonious=3.3) {
+    public function create(array $chordProgress, int $smoothness, float $harmonious) {
         $merokeys = [$this->selectKey($this->keyList)];
         $renewKeyList = [];
         $chordProgKeys =[];
@@ -50,13 +50,17 @@ class Merody {
             for ($i = 0; $i < 8; $i++) {
                 $base = $this->keyList[end($merokeys)][1];
                 foreach ($this->keyList as $key => $val){
-                    $newWeight = $smoothness * (14 - abs($val[1] - $base));
+                    
+                    // $newWeight = $smoothness * (14 - abs($val[1] - $base));
+                    $newWeight = pow(14 - abs($val[1] - $base), $smoothness);
+                    
                     if (in_array(mb_ereg_replace('[^a-zA-Z]', '', $key), $chordKeys)) {
                         $newWeight = $harmonious * $newWeight;
                     }
                     $addList = [$key => [$newWeight,$val[1]]];
                     $renewKeyList = array_merge($renewKeyList, $addList);
                 }
+                
 
                 array_push(
                     $merokeys,
@@ -70,6 +74,7 @@ class Merody {
                     array($chord['chordName']),
                     $chordKeys
                 ))
+                
             );
 
             $w++;

@@ -1,5 +1,5 @@
 <div>
-    <span id="{{ $name }}-rs-bullet">{{ $min }}</span>
+    <span id="{{ $name }}-rs-bullet">{{ $name }}</span>
     <input
         type="range"
         class="form-control-range"

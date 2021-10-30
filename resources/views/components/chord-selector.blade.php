@@ -1,7 +1,7 @@
 <div class="col">
-    <label for="{{ $id }}" class="form-label">Choose a {{ $id }}:</label>
+    <label for="{{ $id }}" class="form-label">{{ $id }}:</label>
     <select class="form-select" name="{{ $name }}" id="{{ $id }}" required>
-        <option selected disabled value="">--Please choose an option--</option>
+        <option selected disabled value="">--Please choose a chord.--</option>
         @foreach ($chords as $chord)
                 <option
                     value="{{ $chord->id }}"
