@@ -3,12 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="{{ asset('js/app.js') }}" defer></script>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-        <title>Select Chords</title>
+        <title>コード選択画面</title>
     </head>
     <body>
         <nav class="navbar navbar-light bg-dark">
@@ -47,6 +46,7 @@
                     </div>
                     <x-scale-selector />
                 </div>
+
                 <div class="col text-right">
                     <button type="submit" class="btn btn-dark">メロディ生成</button>
                 </div>
