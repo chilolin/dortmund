@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/function-play-sound.js') }}" defer></script>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -75,6 +76,7 @@
                     ?>
                 </tbody>
             </table>
+            <button onclick="playAccompany(mero_array,chord_array,0.25);">Replay</button>
         </div>
     </body>
 </html>
