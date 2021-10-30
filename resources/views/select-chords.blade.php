@@ -22,23 +22,15 @@
         </nav>
 
         <div class="container">
-
-
-
             <form action="{{ route('merody') }}" method="GET" class="needs-validation" novalidate>
                 <div class='col-12'>
-
-                <div class="row p-3">
-
+                    <div class="row p-3">
                         <x-chord-selector id="first-chord" name="firstChord" />
                         <x-chord-selector id="second-chord" name="secondChord" />
                         <x-chord-selector id="third-chord" name="thirdChord" />
                         <x-chord-selector id="forth-chord" name="forthChord" />
-
+                    </div>
                 </div>
-
-             </div>
-
 
                 <div class="row p-5">
                     <div class="col-6">
@@ -52,16 +44,11 @@
                             <div class="col-2">
                             </div>
                         </div>
-
                     </div>
-
                     <x-scale-selector />
-
-
                 </div>
                 <div class="col text-right">
                     <button type="submit" class="btn btn-dark">メロディ生成</button>
-
                 </div>
 
             </form>
