@@ -1,11 +1,11 @@
-console.log("check-js");
+// console.log("check-js");
 
 function playAccompany(mero_array, chord_array, unit_time) {
-    console.log(mero_array);
-    console.log(chord_array);
+    // console.log(mero_array);
+    // console.log(chord_array);
 
-    const startTime = Date.now();
-    console.log("START", startTime);
+    // const startTime = Date.now();
+    // console.log("START", startTime);
 
     key_array = ["key1", "key2", "key3"];
 
@@ -51,7 +51,7 @@ function playAccompany(mero_array, chord_array, unit_time) {
         osc_mero.stop((t + 1) * unit_time);
     }
 
-    const endTime = Date.now();
-    console.log("ENDTIME", endTime);
-    console.log("END-START", endTime - startTime);
+    // const endTime = Date.now();
+    // console.log("ENDTIME", endTime);
+    // console.log("END-START", endTime - startTime);
 }
