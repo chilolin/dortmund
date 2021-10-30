@@ -9,16 +9,6 @@ use App\Library\Merody;
 class ChordController extends Controller
 {
     /**
-     * コードを全て渡す
-     *
-     * @return array
-     */
-    public function getAll() {
-        $chords = Chord::all();
-        return $chords;
-    }
-
-    /**
      *　　コードを選択する画面に遷移する。
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
