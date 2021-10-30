@@ -44,10 +44,10 @@ class ChordController extends Controller
             'secondChord' => 'required',
             'thirdChord' => 'required',
             'forthChord' => 'required',
+            'keys' => 'required',
             'smoothness' => 'required',
             'harmonious' => 'required',
         ]);
-
 
         // key付きのコード情報を取得
         $selectedChords = $request->only('firstChord', 'secondChord', 'thirdChord', 'forthChord');
@@ -65,11 +65,15 @@ class ChordController extends Controller
         );
 
         // メロディを生成。
-        $merody = Merody::create($chordProgress, $request->input('keys'), $request->input('smoothness'), $request->input('harmonious'));
-        $scores = $merody['scores'];
-        $merofreqs = $merody['merofreqs'];
-        $chordProgKeys = $merody['chordProgKeys'];
+        $merody = new Merody($request->input('keys'));
+        $createdMerody = $merody->create($chordProgress, $request->input('smoothness'), $request->input('harmonious'));
 
-        return view('merody', compact('scores', 'merofreqs','chordProgKeys','chordProgressFreqs'));
+        // 遷移
+        return view('merody', array(
+            'scores' => $createdMerody['scores'],
+            'merofreqs' => $createdMerody['merofreqs'],
+            'chordProgKeys' => $createdMerody['chordProgKeys'],
+            'chordProgressFreqs' => $chordProgressFreqs
+        ));
     }
 }
