@@ -32,8 +32,13 @@
         </script>
 
         <div class="container">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="/">Dortmund</a>
+                </div>
+            </nav>
             <h3>Melody</h3>
-            <table class="table-sm table-bordered">
+            <table class="table table-bordered">
                 <thead >
                     <tr >
                         <th scope="col"></th>
@@ -75,6 +80,8 @@
                     ?>
                 </tbody>
             </table>
+
+            <button onclick="playAccompany(mero_array,chord_array,0.25);">Replay</button>
         </div>
     </body>
 </html>

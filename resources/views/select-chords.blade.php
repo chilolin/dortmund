@@ -12,6 +12,13 @@
     </head>
     <body>
         <div class="container">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="/">Dortmund</a>
+                </div>
+            </nav>
+              
+             
             <form action="{{ route('merody') }}" method="GET" class="needs-validation" novalidate>
                 <div class="row">
                     <x-chord-selector id="first-chord" name="firstChord" chords="{{ $chords }}" />

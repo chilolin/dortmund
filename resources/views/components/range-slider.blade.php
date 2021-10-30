@@ -11,7 +11,7 @@
         name="{{ $name }}"
     >
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         {
             const rangeSlider = document.getElementById("{{ $name }}-rs-line");
             const rangeBullet = document.getElementById("{{ $name }}-rs-bullet");
@@ -25,5 +25,5 @@
 
             rangeSlider.addEventListener("input", showSliderValue, false);
         }
-    </script>
+    </script> --}}
 </div>
