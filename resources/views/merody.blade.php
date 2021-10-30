@@ -9,7 +9,6 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
         <title>Select Chords</title>
     </head>
     <body>
@@ -86,7 +85,15 @@
                 </tbody>
             </table>
 
-            <button class="btn btn-dark" onclick="playAccompany(mero_array,chord_array,0.25);">Replay</button>
+                <button class="btn btn-dark"yb onclick="playAccompany(mero_array,chord_array,0.25);">Play</button>
+                <button class="btn btn-dark" onclick="window.location.reload(true);">
+                    <i class="fa fa-refresh" aria-hidden="true"></i><span>Recreate</span>
+                </button>
+                <div class="text-right">
+                <button class="btn btn-dark ml-auto" onclick="location.href='/'" >Return Chords Select</button>
+                </div>
+            
+            
         </div>
     </body>
 </html>

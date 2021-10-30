@@ -64,9 +64,6 @@
 
                 </div>
 
-                <div>
-                    {{-- <button type="submit">メロディ生成</button> --}}
-                </div>
             </form>
         </div>
     </body>

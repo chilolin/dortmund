@@ -3,7 +3,7 @@
 ?>
 
 <div>
-    <select id="scale-selector">
+    <select class='form-select p-1'　id="scale-selector">
         @foreach($scaleNames as $scale => $japanese)
             <option value="{{ $scale }}">{{ $japanese }}</option>
         @endforeach

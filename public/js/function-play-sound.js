@@ -11,11 +11,11 @@ function playAccompany(mero_array,chord_array,unit_time){
 
   
   key_array = ["key1","key2","key3"];
-  // console.log(Object.entries(chord_array));
 
+
+  audioctx = new AudioContext();
 
   for (t=0; t<32; t++){
-    audioctx = new AudioContext();
 
 
     s = t % 8;
@@ -40,19 +40,19 @@ function playAccompany(mero_array,chord_array,unit_time){
         osc_chord2.connect(audioctx.destination);
         osc_chord2.start(t*unit_time);
 
-        // console.log("chordStart",t*unit_time);
-
-
-
     }
+
+
+
+    
 
     if (s == 7){
       osc_chord0.stop((t+1)*unit_time);
       osc_chord1.stop((t+1)*unit_time);
       osc_chord2.stop((t+1)*unit_time);
 
-      // console.log("chordStop",(t+1)*unit_time);
     }
+
 
 
     osc_mero = new OscillatorNode(audioctx);
@@ -62,10 +62,8 @@ function playAccompany(mero_array,chord_array,unit_time){
     osc_mero.start(t*unit_time);
     osc_mero.stop((t+1)*unit_time);
 
-    // console.log("meroStart",t*unit_time);
-
-    // console.log(t);
   }
+
 
 
   const endTime = Date.now();
