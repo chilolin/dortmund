@@ -4,8 +4,7 @@ namespace App\Library;
 use App\Models\Key;
 
 class Merody {
-
-    protected static $keyList = [];
+    protected $keyList = [];
 
     /**
      * Create a new component instance.
@@ -13,40 +12,33 @@ class Merody {
      * @param array $keys
      * @return void
      */
-    // public function __construct($keys)
-    // {
-    //     $this->keyList = [];
-    // }
+    public function __construct(array $keys)
+    {
+        $this->keyList = array_reduce(
+            array_keys($keys),
+            function (array $accumulator, int $keysIndex) use ($keys) {
+                $keyName = Key::find($keys[$keysIndex])->name;
+                return array_merge($accumulator, array($keyName => [3, $keysIndex]));
+            },
+            []
+        );
+    }
 
     /**
      * メロディを作成する。
      *
      * @param array $chordProgress
-     * @param array $keys
      * @param int $smoothness
      * @param float $harmonious
      * @return array
      */
-    public static function create($chordProgress, $keys, $smoothness=30, $harmonious=3.3) {
-
-
-        $z=0;
-        foreach($keys as $val) {
-            $key=Key::find($val);
-            $addArray =  [$key->name =>[3,$z]];
-
-            self::$keyList += $addArray;
-            $z++;
-
-        }
-
-
-        $merokeys = [self::selectKey(self::$keyList)];
+    public function create(array $chordProgress, int $smoothness=30, float $harmonious=3.3) {
+        $merokeys = [$this->selectKey($this->keyList)];
         $renewKeyList = [];
         $chordProgKeys =[];
 
+        $w=0;
         foreach ($chordProgress as $chord) {
-            $w=0;
             $chordKeys = [];
             array_push(
                 $chordKeys,
@@ -56,9 +48,8 @@ class Merody {
             );
 
             for ($i = 0; $i < 8; $i++) {
-                // dd(self::$KEY_LIST[end($merokeys)][1]);
-                $base = self::$keyList[end($merokeys)][1];
-                foreach (self::$keyList as $key => $val){
+                $base = $this->keyList[end($merokeys)][1];
+                foreach ($this->keyList as $key => $val){
                     $newWeight = $smoothness * (14 - abs($val[1] - $base));
                     if (in_array(mb_ereg_replace('[^a-zA-Z]', '', $key), $chordKeys)) {
                         $newWeight = $harmonious * $newWeight;
@@ -67,11 +58,9 @@ class Merody {
                     $renewKeyList = array_merge($renewKeyList, $addList);
                 }
 
-
-
                 array_push(
                     $merokeys,
-                    self::selectKey($renewKeyList)
+                    $this->selectKey($renewKeyList)
                 );
             }
 
@@ -94,7 +83,7 @@ class Merody {
             $freq = Key::where('name', $val)->value('freq');
             array_push($merofreqs, $freq);
         }
-        $scores = self::changeToScore($merokeys);
+        $scores = $this->changeToScore($merokeys);
 
         return [
             'scores' => $scores,
@@ -104,8 +93,8 @@ class Merody {
 
     }
 
-    private static function selectKey($keyList){
-        $newkey = lcg_value() * self::sumTotalWeight($keyList);
+    private function selectKey($keyList){
+        $newkey = lcg_value() * $this->sumTotalWeight($keyList);
         $searchPosition =0.0;
 
         foreach ($keyList as $key => $val) {
@@ -116,20 +105,20 @@ class Merody {
         }
     }
 
-    private static function sumTotalWeight($keyList){
+    private function sumTotalWeight($keyList){
         return array_sum((array_column($keyList, 0)));
     }
 
-    private static function changeToScore($merokeys){
+    private function changeToScore($merokeys){
         $score = [];
-        $lowestkeyId = Key::where('name',array_key_first(self::$keyList))->first()->id;
-        $highestkeyId = Key::where('name',array_key_last(self::$keyList))->first()->id;
+        $lowestkeyId = Key::where('name',array_key_first($this->keyList))->first()->id;
+        $highestkeyId = Key::where('name',array_key_last($this->keyList))->first()->id;
 
         for ($i = $lowestkeyId; $i <= $highestkeyId; $i++) {
             $score = $score + array(Key::find($i)->name =>array_fill(0,32,0));
         }
 
-        foreach($merokeys as $key=>$val){
+        foreach($merokeys as $key => $val){
             $score[$val][$key] = 1;
         }
         $score = array_reverse($score);

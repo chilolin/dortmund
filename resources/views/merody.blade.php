@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/function-play-sound.js') }}" defer></script>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -53,7 +54,7 @@
                             for ($i = 0; $i < 4; $i++) {
                                 $start = 8 * $i;
                                 $end = 8 * ($i + 1) - 1;
-                                if (in_array(mb_ereg_replace('[^a-zA-Z]', '', $key), $chordProgKeys[$i])){
+                                if (in_array(mb_ereg_replace('[0-9]', '', $key), $chordProgKeys[$i])){
                                     $t = $start;
                                     while ($t<=$end){
                                         $val[$t] +=4;
