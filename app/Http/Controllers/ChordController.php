@@ -64,7 +64,6 @@ class ChordController extends Controller
             $selectedChords
         );
 
-
         // メロディを生成。
         $merody = Merody::create($chordProgress, $request->input('keys'), $request->input('smoothness'), $request->input('harmonious'));
         $scores = $merody['scores'];

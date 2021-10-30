@@ -65,8 +65,8 @@ class Merody {
                     }
                     $addList = [$key => [$newWeight,$val[1]]];
                     $renewKeyList = array_merge($renewKeyList, $addList);
-
                 }
+
 
 
                 array_push(
@@ -139,7 +139,6 @@ class Merody {
         //     $pattern = '/[0-9]/';
         //     if(strpos($key1, 'A') !== false or strpos($key1, 'B') !== false){
         //         $key1 = preg_replace_callback($pattern, function ($m) {
-
         //             return ($m[0] + 1);
         //         }, $key1);
         //       }
