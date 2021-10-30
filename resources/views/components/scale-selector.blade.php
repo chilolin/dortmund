@@ -1,3 +1,7 @@
+<?php
+    $jsonScaleKeyIds = json_encode($scaleKeyIds);
+?>
+
 <div>
     <select id="scale-selector">
         @foreach($scaleNames as $scale => $japanese)
@@ -14,6 +18,9 @@
                     name="keys[]"
                     id="key-{{ $key->id }}"
                     value="{{ $key->id }}"
+                    @if (array_search($key->id, $scaleKeyIds['major']) !== false)
+                        checked
+                    @endif
                 >
                 <label class="form-check-label" for="keys1">
                     {{ $key->name }}
@@ -21,6 +28,7 @@
             </div>
         @endforeach
     </div>
+
 
     <script type="text/javascript">
         {
@@ -33,21 +41,23 @@
                     checkbox.checked = false;
                 })
 
+                // 選択されたスケールのキーにチェックをつける。
                 const scale = event.target.value;
-
-                checkedKeys.forEach(function (keyId) {
-                    const keyCheckBox = document.getElementById(keyId);
-                    keyCheckBox.checked = true;
+                const checkingKeyIds = getCheckingKeyIds(scale);
+                checkingKeyIds.forEach(function (keyId) {
+                    const checkingBox = document.getElementById(keyId);
+                    checkingBox.checked = true;
                 })
             }
 
-            function selectScale(scale) {
-                const scales = {
-                    'major': [52, 54, 56, 57]
-                }
+            const scaleKeyIds = JSON.parse('<?php echo $jsonScaleKeyIds?>');
+            function getCheckingKeyIds(scale) {
+                return scaleKeyIds[scale].map(function (id) {
+                    return 'key-' + id;
+                })
             }
 
-            scaleSelector.addEventListener('change', handleChangeScale)
+            scaleSelector.addEventListener('change', handleChangeScale);
         }
     </script>
 </div>

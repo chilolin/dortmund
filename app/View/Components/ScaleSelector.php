@@ -9,7 +9,7 @@ class ScaleSelector extends Component
 {
     private $scaleKeys = [
         "major" => ["C", "D", "E", "F", "G", "A", "B"],
-        "hemitonicPentatonic" => ["C", "C#", "F", "G", "B"],
+        "hemitonicPentatonic" => ["C", "C#", "F", "G", "A#"],
         "okinawa" => ["C", "E", "F", "G", "B"],
         "folkSong" => ["C", "D#", "F", "G", "A#"],
         "anhemitonicPentatonic" => ["C", "D", "F", "G", "A#"],

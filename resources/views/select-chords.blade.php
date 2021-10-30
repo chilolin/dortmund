@@ -55,25 +55,7 @@
 
                     </div>
 
-                    <div class="col-6">
-                        <h5>Key</h5>
-                        <?php
-                        use Illuminate\Support\Facades\DB;
-
-                        $keys = DB::table('keys')->whereBetween('id', [52, 64])->get(); ?>
-                        <?php foreach($keys as $val){ ?>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="keys[]" id="keys1" value="{{ $val->id }}"
-                            <?php if (strpos($val->name,'#') === false) echo("checked"); ?>
-                            >
-                            <label class="form-check-label" for="keys1">
-                                <?php echo($val->name)?>
-                            </label>
-                        </div>
-                        <?php  } ?>
-
-
-                    </div>
+                    <x-scale-selector />
 
 
                 </div>
