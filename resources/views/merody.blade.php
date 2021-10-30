@@ -14,6 +14,23 @@
     <body>
         {{-- @dd($_GET) --}}
         {{-- @dd($merofreqs); --}}
+        <?php
+        $mero_array = json_encode($merofreqs);
+        $chord_array = json_encode($chordProgressFreqs);
+        // var_dump($mero_array);
+        // var_dump($chord_array);
+        // exit();
+
+        ?>
+
+        <script>
+            let mero_array = <?php echo $mero_array; ?>;
+            let chord_array = <?php echo $chord_array; ?>;
+            console.log(mero_array);
+            console.log(chord_array);
+            // playAccompany(mero_array,chord_array,0.25);
+        </script>
+
         <div class="container">
             <h3>Melody</h3>
             <table class="table-sm table-bordered">
