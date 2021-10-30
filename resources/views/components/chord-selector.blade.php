@@ -15,6 +15,6 @@
     </select>
 
     @error($name)
-        <div class="invalid-feedback">必ず指定してください。</div>
+        <div style="color:red">必ず指定してください。</div>
     @enderror
 </div>
