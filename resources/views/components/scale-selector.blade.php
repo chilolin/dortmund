@@ -13,6 +13,7 @@
         @foreach($notes as $note)
             <div class="form-check">
                 <input
+                
                     class="form-check-input"
                     type="checkbox"
                     name="notes[]"
