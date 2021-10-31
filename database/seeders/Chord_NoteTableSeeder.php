@@ -20,77 +20,77 @@ class Chord_NoteTableSeeder extends Seeder
         DB::table("chord_note")->insert(
             [
                 [ 
-                    'chord_id'=>1,
-                    'note_id'=>47,
+                    'chord_id'=>5,
+                    'note_id'=>465,
                 ],
                 [ 
-                    'chord_id'=>1,
-                    'note_id'=>52,
+                    'chord_id'=>5,
+                    'note_id'=>515,
                 ],
                 [ 
-                    'chord_id'=>1,
-                    'note_id'=>56,
+                    'chord_id'=>5,
+                    'note_id'=>555,
                 ],
                 [ 
-                    'chord_id'=>2,
-                    'note_id'=>49,
+                    'chord_id'=>15,
+                    'note_id'=>485,
                 ],
                 [ 
-                    'chord_id'=>2,
-                    'note_id'=>54,
+                    'chord_id'=>15,
+                    'note_id'=>535,
                 ],
     
                 [ 
-                    'chord_id'=>2,
-                    'note_id'=>57,
+                    'chord_id'=>15,
+                    'note_id'=>565,
                 ],
                 [ 
-                    'chord_id'=>3,
-                    'note_id'=>47,
+                    'chord_id'=>25,
+                    'note_id'=>465,
                 ],
                 [ 
-                    'chord_id'=>3,
-                    'note_id'=>51,
+                    'chord_id'=>25,
+                    'note_id'=> 505,
                 ],
                 [ 
-                    'chord_id'=>3,
-                    'note_id'=>56,
+                    'chord_id'=>25,
+                    'note_id'=>555,
                 ],
                 [ 
-                    'chord_id'=>4,
-                    'note_id'=>49,
+                    'chord_id'=>35,
+                    'note_id'=>485,
                 ],
                 [ 
-                    'chord_id'=>4,
-                    'note_id'=>52,
+                    'chord_id'=>35,
+                    'note_id'=>515,
                 ],
                 [ 
-                    'chord_id'=>4,
-                    'note_id'=>57,
+                    'chord_id'=>35,
+                    'note_id'=>565,
                 ],
                 [ 
-                    'chord_id'=>5,
-                    'note_id'=>47,
+                    'chord_id'=>45,
+                    'note_id'=>465,
                 ],
                 [ 
-                    'chord_id'=>5,
-                    'note_id'=>51,
+                    'chord_id'=>45,
+                    'note_id'=>505,
                 ],
                 [ 
-                    'chord_id'=>5,
-                    'note_id'=>54,
+                    'chord_id'=>45,
+                    'note_id'=>555,
                 ],
                 [ 
-                    'chord_id'=>6,
-                    'note_id'=>49,
+                    'chord_id'=>55,
+                    'note_id'=>485,
                 ],
                 [ 
-                    'chord_id'=>6,
-                    'note_id'=>52,
+                    'chord_id'=>55,
+                    'note_id'=>515,
                 ],
                 [ 
-                    'chord_id'=>6,
-                    'note_id'=>56,
+                    'chord_id'=>55,
+                    'note_id'=>565,
                 ],
             ]
             
