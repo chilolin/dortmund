@@ -38,7 +38,7 @@ class ScaleSelector extends Component
      */
     public function __construct()
     {
-        $this->notes = Note::whereBetween('id', [52, 64])->get();
+        $this->notes = Note::whereBetween('id', [514, 636])->get();
         $this->scaleNoteIds = array_map(function ($scale) {
             return array_reduce($scale, function ($noteIds, $noteName) {
                 return array_merge($noteIds, $this->selectNoteFromName($noteName));
