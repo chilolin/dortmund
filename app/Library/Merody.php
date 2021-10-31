@@ -119,7 +119,8 @@ class Merody {
         $lowestnoteId = Note::where('name',array_key_first($this->noteList))->first()->id;
         $highestnoteId = Note::where('name',array_key_last($this->noteList))->first()->id;
 
-        for ($i = $lowestnoteId; $i <= $highestnoteId; $i++) {
+        for ($i = $lowestnoteId; $i <= $highestnoteId; $i=$i+10) {
+            
             $score = $score + array(Note::find($i)->name =>array_fill(0,32,0));
         }
 
