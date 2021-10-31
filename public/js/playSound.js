@@ -7,7 +7,7 @@ function playAccompany(mero_array, chord_array, unit_time) {
     // const startTime = Date.now();
     // console.log("START", startTime);
 
-    key_array = ["key1", "key2", "key3"];
+    note_array = ["note1", "note2", "note3"];
 
     audioctx = new AudioContext();
 
@@ -17,21 +17,21 @@ function playAccompany(mero_array, chord_array, unit_time) {
         if (s == 0) {
             osc_chord0 = new OscillatorNode(audioctx);
             osc_chord0.frequency.value =
-                Object.entries(chord_array)[Math.floor(t / 8)][1][key_array[0]];
+                Object.entries(chord_array)[Math.floor(t / 8)][1][note_array[0]];
             osc_chord0.type = "sine";
             osc_chord0.connect(audioctx.destination);
             osc_chord0.start(t * unit_time);
 
             osc_chord1 = new OscillatorNode(audioctx);
             osc_chord1.frequency.value =
-                Object.entries(chord_array)[Math.floor(t / 8)][1][key_array[1]];
+                Object.entries(chord_array)[Math.floor(t / 8)][1][note_array[1]];
             osc_chord1.type = "sine";
             osc_chord1.connect(audioctx.destination);
             osc_chord1.start(t * unit_time);
 
             osc_chord2 = new OscillatorNode(audioctx);
             osc_chord2.frequency.value =
-                Object.entries(chord_array)[Math.floor(t / 8)][1][key_array[2]];
+                Object.entries(chord_array)[Math.floor(t / 8)][1][note_array[2]];
             osc_chord2.type = "sine";
             osc_chord2.connect(audioctx.destination);
             osc_chord2.start(t * unit_time);

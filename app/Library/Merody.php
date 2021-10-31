@@ -1,24 +1,24 @@
 <?php
 namespace App\Library;
 
-use App\Models\Key;
+use App\Models\Note;
 
 class Merody {
-    protected $keyList = [];
+    protected $noteList = [];
 
     /**
      * Create a new component instance.
      *
-     * @param array $keys
+     * @param array $notes
      * @return void
      */
-    public function __construct(array $keys)
+    public function __construct(array $notes)
     {
-        $this->keyList = array_reduce(
-            array_keys($keys),
-            function (array $accumulator, int $keysIndex) use ($keys) {
-                $keyName = Key::find($keys[$keysIndex])->name;
-                return array_merge($accumulator, array($keyName => [3, $keysIndex]));
+        $this->noteList = array_reduce(
+            array_keys($notes),
+            function (array $accumulator, int $notesIndex) use ($notes) {
+                $noteName = Note::find($notes[$notesIndex])->name;
+                return array_merge($accumulator, array($noteName => [3, $notesIndex]));
             },
             []
         );
@@ -33,46 +33,46 @@ class Merody {
      * @return array
      */
     public function create(array $chordProgress, int $smoothness, float $harmonious) {
-        $merokeys = [$this->selectKey($this->keyList)];
-        $renewKeyList = [];
-        $chordProgKeys =[];
+        $meronotes = [$this->selectNote($this->noteList)];
+        $renewNoteList = [];
+        $chordProgNotes =[];
 
         $w=0;
         foreach ($chordProgress as $chord) {
-            $chordKeys = [];
+            $chordNotes = [];
             array_push(
-                $chordKeys,
-                mb_ereg_replace('[^a-zA-Z]', '', $chord['key1']),
-                mb_ereg_replace('[^a-zA-Z]', '', $chord['key2']),
-                mb_ereg_replace('[^a-zA-Z]', '', $chord['key3'])
+                $chordNotes,
+                mb_ereg_replace('[^a-zA-Z]', '', $chord['note1']),
+                mb_ereg_replace('[^a-zA-Z]', '', $chord['note2']),
+                mb_ereg_replace('[^a-zA-Z]', '', $chord['note3'])
             );
 
             for ($i = 0; $i < 8; $i++) {
-                $base = $this->keyList[end($merokeys)][1];
-                foreach ($this->keyList as $key => $val){
+                $base = $this->noteList[end($meronotes)][1];
+                foreach ($this->noteList as $note => $val){
                     
                     // $newWeight = $smoothness * (14 - abs($val[1] - $base));
                     $newWeight = pow(14 - abs($val[1] - $base), $smoothness);
                     
-                    if (in_array(mb_ereg_replace('[^a-zA-Z]', '', $key), $chordKeys)) {
+                    if (in_array(mb_ereg_replace('[^a-zA-Z]', '', $note), $chordNotes)) {
                         $newWeight = $harmonious * $newWeight;
                     }
-                    $addList = [$key => [$newWeight,$val[1]]];
-                    $renewKeyList = array_merge($renewKeyList, $addList);
+                    $addList = [$note => [$newWeight,$val[1]]];
+                    $renewNoteList = array_merge($renewNoteList, $addList);
                 }
                 
 
                 array_push(
-                    $merokeys,
-                    $this->selectKey($renewKeyList)
+                    $meronotes,
+                    $this->selectNote($renewNoteList)
                 );
             }
 
-            $chordProgKeys = array_merge(
-                $chordProgKeys,
+            $chordProgNotes = array_merge(
+                $chordProgNotes,
                 array($w => array_merge(
                     array($chord['chordName']),
-                    $chordKeys
+                    $chordNotes
                 ))
                 
             );
@@ -81,67 +81,67 @@ class Merody {
         }
 
 
-        array_shift($merokeys);
+        array_shift($meronotes);
         $merofreqs = [];
 
-        foreach($merokeys as $val){
-            $freq = Key::where('name', $val)->value('freq');
+        foreach($meronotes as $val){
+            $freq = Note::where('name', $val)->value('freq');
             array_push($merofreqs, $freq);
         }
-        $scores = $this->changeToScore($merokeys);
+        $scores = $this->changeToScore($meronotes);
 
         return [
             'scores' => $scores,
             'merofreqs' => $merofreqs,
-            'chordProgKeys' => $chordProgKeys
+            'chordProgNotes' => $chordProgNotes
         ];
 
     }
 
-    private function selectKey($keyList){
-        $newkey = lcg_value() * $this->sumTotalWeight($keyList);
+    private function selectNote($noteList){
+        $newnote = lcg_value() * $this->sumTotalWeight($noteList);
         $searchPosition =0.0;
 
-        foreach ($keyList as $key => $val) {
+        foreach ($noteList as $note => $val) {
             $searchPosition += $val[0];
-            if ($newkey < $searchPosition){
-                return $key;
+            if ($newnote < $searchPosition){
+                return $note;
             }
         }
     }
 
-    private function sumTotalWeight($keyList){
-        return array_sum((array_column($keyList, 0)));
+    private function sumTotalWeight($noteList){
+        return array_sum((array_column($noteList, 0)));
     }
 
-    private function changeToScore($merokeys){
+    private function changeToScore($meronotes){
         $score = [];
-        $lowestkeyId = Key::where('name',array_key_first($this->keyList))->first()->id;
-        $highestkeyId = Key::where('name',array_key_last($this->keyList))->first()->id;
+        $lowestnoteId = Note::where('name',array_key_first($this->noteList))->first()->id;
+        $highestnoteId = Note::where('name',array_key_last($this->noteList))->first()->id;
 
-        for ($i = $lowestkeyId; $i <= $highestkeyId; $i++) {
-            $score = $score + array(Key::find($i)->name =>array_fill(0,32,0));
+        for ($i = $lowestnoteId; $i <= $highestnoteId; $i++) {
+            $score = $score + array(Note::find($i)->name =>array_fill(0,32,0));
         }
 
-        foreach($merokeys as $key => $val){
-            $score[$val][$key] = 1;
+        foreach($meronotes as $note => $val){
+            $score[$val][$note] = 1;
         }
         $score = array_reverse($score);
 
         //ここからのuksort関数のコメントアウトは現状要らないが一応残している
-        // uksort($score, function($key1,$key2){
+        // uksort($score, function($note1,$note2){
         //     $pattern = '/[0-9]/';
-        //     if(strpos($key1, 'A') !== false or strpos($key1, 'B') !== false){
-        //         $key1 = preg_replace_callback($pattern, function ($m) {
+        //     if(strpos($note1, 'A') !== false or strpos($note1, 'B') !== false){
+        //         $note1 = preg_replace_callback($pattern, function ($m) {
         //             return ($m[0] + 1);
-        //         }, $key1);
+        //         }, $note1);
         //       }
-        //     if(strpos($key2, 'A') !== false or strpos($key2, 'B') !== false){
-        //         $key2 = preg_replace_callback($pattern, function ($m) {
+        //     if(strpos($note2, 'A') !== false or strpos($note2, 'B') !== false){
+        //         $note2 = preg_replace_callback($pattern, function ($m) {
         //             return ($m[0] + 1);
-        //         }, $key2);
+        //         }, $note2);
         //     }
-        //     return strrev($key1) <strrev($key2);
+        //     return strrev($note1) <strrev($note2);
         // } );
 
         return $score;

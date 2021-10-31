@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chord;
-use App\Models\Key;
+use App\Models\Note;
 use App\Library\Merody;
 
 class ChordController extends Controller
@@ -23,35 +23,35 @@ class ChordController extends Controller
             'secondChord' => 'required',
             'thirdChord' => 'required',
             'forthChord' => 'required',
-            'keys' => 'required',
+            'notes' => 'required',
             'smoothness' => 'required',
             'harmonious' => 'required',
         ]);
 
-        // key付きのコード情報を取得
+        // note付きのコード情報を取得
         $selectedChords = $request->only('firstChord', 'secondChord', 'thirdChord', 'forthChord');
         $chordProgress = array_map(
             function(string $chordId) {
-                return Chord::getChordWithKeys($chordId);
+                return Chord::getChordWithNotes($chordId);
             },
             $selectedChords
         );
         $chordProgressFreqs = array_map(
             function(string $chordId) {
-                return Chord::getChordWithKeysFreq($chordId);
+                return Chord::getChordWithNotesFreq($chordId);
             },
             $selectedChords
         );
 
         // メロディを生成。
-        $merody = new Merody($request->input('keys'));
+        $merody = new Merody($request->input('notes'));
         $createdMerody = $merody->create($chordProgress, $request->input('smoothness'), $request->input('harmonious'));
 
         // 遷移
         return view('merody', array(
             'scores' => $createdMerody['scores'],
             'merofreqs' => $createdMerody['merofreqs'],
-            'chordProgKeys' => $createdMerody['chordProgKeys'],
+            'chordProgNotes' => $createdMerody['chordProgNotes'],
             'chordProgressFreqs' => $chordProgressFreqs
         ));
     }

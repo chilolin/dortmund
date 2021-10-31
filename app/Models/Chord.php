@@ -19,29 +19,29 @@ class Chord extends Model
      *
      * @return
      */
-    public static function getChordWithKeys(string $id) {
+    public static function getChordWithNotes(string $id) {
         $chord = self::find($id);
         return [
             'chordName' => $chord->name,
-            'key1' => $chord->keys[0]->name,
-            'key2' => $chord->keys[1]->name,
-            'key3' => $chord->keys[2]->name,
+            'note1' => $chord->notes[0]->name,
+            'note2' => $chord->notes[1]->name,
+            'note3' => $chord->notes[2]->name,
         ];
     }
     
 
-    public static function getChordWithKeysFreq(string $id) {
+    public static function getChordWithNotesFreq(string $id) {
         $chord = self::find($id);
         return [
             'chordName' => $chord->name,
-            'key1' => $chord->keys[0]->freq,
-            'key2' => $chord->keys[1]->freq,
-            'key3' => $chord->keys[2]->freq,
+            'note1' => $chord->notes[0]->freq,
+            'note2' => $chord->notes[1]->freq,
+            'note3' => $chord->notes[2]->freq,
         ];
     }
 
-    public function keys()
+    public function notes()
     {
-        return $this->belongsToMany(Key::class);
+        return $this->belongsToMany(Note::class);
     }
 }

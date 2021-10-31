@@ -17,16 +17,16 @@ class CreateChordsTable extends Migration
             $table->increments('id');
             $table->string('name');
 
-            // $table->unsignedBigInteger('first_key_id');
-            // $table->foreign('first_key_id')->references('id')->on('keys')->onDelete('cascade');
-            // $table->unsignedBigInteger('second_key_id');
-            // $table->foreign('second_key_id')->references('id')->on('keys')->onDelete('cascade');
-            // $table->unsignedBigInteger('third_key_id');
-            // $table->foreign('third_key_id')->references('id')->on('keys')->onDelete('cascade');
-            // $table->unsignedBigInteger('forth_key_id')->nullable();
-            // $table->foreign('forth_key_id')->references('id')->on('keys')->onDelete('cascade');
-            // $table->unsignedBigInteger('fifth_key_id')->nullable();
-            // $table->foreign('fifth_key_id')->references('id')->on('keys')->onDelete('cascade');
+            // $table->unsignedBigInteger('first_note_id');
+            // $table->foreign('first_note_id')->references('id')->on('notes')->onDelete('cascade');
+            // $table->unsignedBigInteger('second_note_id');
+            // $table->foreign('second_note_id')->references('id')->on('notes')->onDelete('cascade');
+            // $table->unsignedBigInteger('third_note_id');
+            // $table->foreign('third_note_id')->references('id')->on('notes')->onDelete('cascade');
+            // $table->unsignedBigInteger('forth_note_id')->nullable();
+            // $table->foreign('forth_note_id')->references('id')->on('notes')->onDelete('cascade');
+            // $table->unsignedBigInteger('fifth_note_id')->nullable();
+            // $table->foreign('fifth_note_id')->references('id')->on('notes')->onDelete('cascade');
 
             $table->timestamps();
              

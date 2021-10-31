@@ -35,8 +35,8 @@
                 <thead >
                     <tr >
                         <th scope="col"></th>
-                        @foreach ($chordProgKeys as $chordProgKey)
-                            <th scope="col" colspan="8">{{ $chordProgKey[0] }}</th>
+                        @foreach ($chordProgNotes as $chordProgNote)
+                            <th scope="col" colspan="8">{{ $chordProgNote[0] }}</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -46,7 +46,7 @@
                             for($i = 0; $i < 4; $i++) {
                                 $start = 8 * $i;
                                 $end = 8 * ($i + 1) - 1;
-                                if (in_array(mb_ereg_replace('[0-9]', '', $key), $chordProgKeys[$i])) {
+                                if (in_array(mb_ereg_replace('[0-9]', '', $key), $chordProgNotes[$i])) {
                                     $t = $start;
                                     while($t <= $end) {
                                         $val[$t] += 4;

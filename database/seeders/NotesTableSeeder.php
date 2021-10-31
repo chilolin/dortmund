@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class KeysTableSeeder extends Seeder
+class NotesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class KeysTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('keys')->truncate();
+        DB::table('notes')->truncate();
 
-        DB::table("keys")->insert(
+        DB::table("notes")->insert(
             [
               [ 'name'=>'A0',
                 'freq'=>27.5,

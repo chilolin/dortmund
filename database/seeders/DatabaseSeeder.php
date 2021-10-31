@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            KeysTableSeeder::class,
+            NotesTableSeeder::class,
             ChordsTableSeeder::class,
-            Chord_KeyTableSeeder::class
+            Chord_NoteTableSeeder::class
           ]);
     }
 }

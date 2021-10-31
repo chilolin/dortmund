@@ -3,11 +3,11 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use App\Models\Key;
+use App\Models\Note;
 
 class ScaleSelector extends Component
 {
-    private $scaleKeys = [
+    private $scaleNotes = [
         "major" => ["C", "D", "E", "F", "G", "A", "B"],
         "hemitonicPentatonic" => ["C", "C#", "F", "G", "A#"],
         "okinawa" => ["C", "E", "F", "G", "B"],
@@ -27,9 +27,9 @@ class ScaleSelector extends Component
         "ritsu" => "律音階",
     ];
 
-    public $scaleKeyIds;
+    public $scaleNoteIds;
 
-    public $keys;
+    public $notes;
 
     /**
      * Create a new component instance.
@@ -38,12 +38,12 @@ class ScaleSelector extends Component
      */
     public function __construct()
     {
-        $this->keys = Key::whereBetween('id', [52, 64])->get();
-        $this->scaleKeyIds = array_map(function ($scale) {
-            return array_reduce($scale, function ($keyIds, $keyName) {
-                return array_merge($keyIds, $this->selectKeyFromName($keyName));
+        $this->notes = Note::whereBetween('id', [52, 64])->get();
+        $this->scaleNoteIds = array_map(function ($scale) {
+            return array_reduce($scale, function ($noteIds, $noteName) {
+                return array_merge($noteIds, $this->selectNoteFromName($noteName));
             }, []);
-        }, $this->scaleKeys);
+        }, $this->scaleNotes);
     }
 
     /**
@@ -60,27 +60,27 @@ class ScaleSelector extends Component
      * キー名からキーのIDを取得。
      * 例）キー名が "C" の時、　取得するキーIDは　”C5” と　”C6” のもの。
      *
-     * @param string $keyName
-     * @return array $keyIds
+     * @param string $noteName
+     * @return array $noteIds
      */
-    private function selectKeyFromName(string $keyName) {
-        $keyIds = [];
+    private function selectNoteFromName(string $noteName) {
+        $noteIds = [];
 
-        foreach ($this->keys as $key) {
+        foreach ($this->notes as $note) {
             if (
-                strpos($keyName, '#') === false &&
-                is_int(strpos($key->name, $keyName)) &&
-                strpos($key->name, '#') === false
+                strpos($noteName, '#') === false &&
+                is_int(strpos($note->name, $noteName)) &&
+                strpos($note->name, '#') === false
             ) {
-                array_push($keyIds, $key->id);
+                array_push($noteIds, $note->id);
             } else if (
-                is_int(strpos($keyName, '#')) &&
-                is_int(strpos($key->name, $keyName))
+                is_int(strpos($noteName, '#')) &&
+                is_int(strpos($note->name, $noteName))
             ) {
-                array_push($keyIds, $key->id);
+                array_push($noteIds, $note->id);
             }
         }
 
-        return $keyIds;
+        return $noteIds;
     }
 }
