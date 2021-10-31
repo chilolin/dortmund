@@ -78,7 +78,7 @@ class Chord_NoteTableSeeder extends Seeder
                 ],
                 [ 
                     'chord_id'=>45,
-                    'note_id'=>555,
+                    'note_id'=>535,
                 ],
                 [ 
                     'chord_id'=>55,
